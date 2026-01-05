@@ -25,6 +25,16 @@ router.register(r'activities', ActivityViewSet)
 router.register(r'workouts', WorkoutViewSet)
 router.register(r'leaderboard', LeaderboardViewSet)
 
+from django.contrib import admin
+from django.urls import path, include
+import os
+
+# ...existing code...
+
+# Get codespace name from environment variable
+codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
+base_api_url = f"https://{codespace_name}-8000.app.github.dev/api/"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
